@@ -1,82 +1,25 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import {
-  Home,
-  HomeLayout,
-  Register,
-  Login,
-  Error,
-  Menu,
-  MenuItemDetail,
-  Reservation,
-  ManagerDashboard,
-  ManagerMenuItemList,
-  ManagerOrderList,
-  ManagerTableList,
-  ManagerReservationList,
-  Account,
-} from "./pages";
+// src/App.js
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import OrderListPage from './pages/ManagerOrderList';
+import ReservationPage from './pages/Reservation';
+import ManagerDashboardPage from './pages/ManagerDashboard';
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <HomeLayout />,
-    errorElement: <Error />,
-    children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: "register",
-        element: <Register />,
-      },
-      {
-        path: "login",
-        element: <Login />,
-      },
-      {
-        path: "menu",
-        element: <Menu />,
-      },
-      {
-        path: "menu/:id",
-        element: <MenuItemDetail />,
-      },
-      {
-        path: "reservation",
-        element: <Reservation />,
-      },
-      {
-        path: "account",
-        element: <Account />,
-      },
-      {
-        path: "manager",
-        element: <ManagerDashboard />,
-        children: [
-          {
-            path: "menu-item-list",
-            element: <ManagerMenuItemList />,
-          },
-          {
-            path: "order-list",
-            element: <ManagerOrderList />,
-          },
-          {
-            path: "table-list",
-            element: <ManagerTableList />,
-          },
-          {
-            path: "reservation-list",
-            element: <ManagerReservationList />,
-          },
-        ],
-      },
-    ],
-  },
-]);
+function App() {
+    return (
+        <Router>
+            <nav style={{ padding: '1rem', backgroundColor: '#f0f0f0' }}>
+                <Link to="/orders" style={{ marginRight: '1rem' }}>Đơn gọi món</Link>
+                <Link to="/reservations" style={{ marginRight: '1rem' }}>Trang đặt bàn</Link>
+                <Link to="/managers">Trang quản lý</Link>
+            </nav>
+            <Routes>
+                <Route path="/orders" element={<OrderListPage />} />
+                <Route path="/reservations" element={<ReservationPage />} />
+                <Route path="/managers" element={<ManagerDashboardPage />} />
+            </Routes>
+        </Router>
+    );
+}
 
-const App = () => {
-  return <RouterProvider router={router} />;
-};
 export default App;
