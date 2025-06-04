@@ -16,6 +16,7 @@ import {
   Account,
 } from "./pages";
 
+// Routes
 const router = createBrowserRouter([
   {
     path: "/",
