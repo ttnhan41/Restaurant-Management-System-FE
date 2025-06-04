@@ -13,6 +13,7 @@ import {
   ManagerOrderList,
   ManagerTableList,
   ManagerReservationList,
+  ManagerUserList,
   Account,
 } from "./pages";
 
@@ -53,7 +54,7 @@ const router = createBrowserRouter([
       },
       {
         path: "manager",
-        element: <ManagerDashboard />,
+        //element: <ManagerDashboard />,
         children: [
           {
             path: "menu-item-list",
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
           {
             path: "reservation-list",
             element: <ManagerReservationList />,
+          },
+          {
+            path: "user-list",
+            element: <ManagerUserList />,
           },
         ],
       },

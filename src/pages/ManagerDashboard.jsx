@@ -1,4 +1,4 @@
 const ManagerDashboard = () => {
-  return <h1>ManagerDashboard</h1>;
+  return <div>ManagerDashboard</div>;
 };
 export default ManagerDashboard;

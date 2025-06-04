@@ -11,4 +11,5 @@ export { default as ManagerMenuItemList } from "./ManagerMenuItemList";
 export { default as ManagerOrderList } from "./ManagerOrderList";
 export { default as ManagerTableList } from "./ManagerTableList";
 export { default as ManagerReservationList } from "./ManagerReservationList";
+export { default as ManagerUserList } from "./ManagerUserList";
 export { default as Account } from "./Account";
