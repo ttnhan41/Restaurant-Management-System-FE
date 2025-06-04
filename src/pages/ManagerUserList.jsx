@@ -15,8 +15,12 @@ import axios from "axios";
 const ManagerUserList = () => {
   const [accounts, setAccounts] = useState([]);
   const [selectedAccounts, setSelectedAccounts] = useState([]);
-  const token =
-    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwic3ViIjoidXNlckBnbWFpbC5jb20iLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTc0OTAxNTg5NywiZXhwIjoxNzQ5MDE5NDk3fQ.O7X6DyZLARn6-y1tXOr4dyeioiGHdPKjInsX8A-AV9s";
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const retrievedToken = localStorage.getItem("token");
+    setToken(retrievedToken);
+  }, []);
 
   useEffect(() => {
     fetchAccounts();
@@ -25,7 +29,7 @@ const ManagerUserList = () => {
   const fetchAccounts = () => {
     axios
       .get("/api/users", {
-        headers: { Authorization: token },
+        headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
         console.log("Danh sách tài khoản:", response.data);
@@ -72,7 +76,7 @@ const ManagerUserList = () => {
         endpoint,
         { userIds: selectedAccounts },
         {
-          headers: { Authorization: token },
+          headers: { Authorization: `Bearer ${token}` },
         }
       )
       .then(() => {

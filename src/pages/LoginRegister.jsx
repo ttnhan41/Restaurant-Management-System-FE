@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Eye, EyeOff, Mail, User } from "lucide-react";
 import {
   Container,
@@ -22,10 +22,12 @@ import {
   DividerText,
   ForgotPasswordWrapper,
 } from "../assets/wrappers/LoginRegister";
+import axios from "axios";
 import { FaFacebook } from "react-icons/fa";
 
 const LoginRegister = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -35,6 +37,15 @@ const LoginRegister = () => {
     confirmPassword: "",
   });
   const [errors, setErrors] = useState({});
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const retrievedToken = localStorage.getItem("token");
+    setToken(retrievedToken);
+    if (retrievedToken) {
+      window.location.href = "/";
+    }
+  }, []);
 
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -56,11 +67,11 @@ const LoginRegister = () => {
 
     if (!formData.password.trim()) {
       newErrors.password = "Mật khẩu không được để trống";
-    } else if (formData.password.length < 6) {
+    } else if (formData.password.length < 6 && !isLogin) {
       newErrors.password = "Mật khẩu phải có ít nhất 6 ký tự";
     }
 
-    if (formData.confirmPassword !== formData.password) {
+    if (!isLogin && formData.confirmPassword !== formData.password) {
       newErrors.confirmPassword = "Mật khẩu xác nhận không khớp";
     }
 
@@ -68,12 +79,90 @@ const LoginRegister = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const loginUser = async (loginData) => {
+    try {
+      const response = await axios.post("/api/auth/login", loginData);
+
+      // Lưu token vào localStorage hoặc cookie
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+      }
+
+      window.location.href = "/";
+
+      return { success: true, data };
+    } catch (error) {
+      console.error("Login error:", error?.response?.data?.message);
+      console.log(error);
+      setErrors({ general: error?.response?.data?.message });
+      return { success: false, error: error?.response?.data?.message };
+    }
+  };
+
+  const registerUser = async (registerData) => {
+    try {
+      const response = await axios.post("/api/auth/register", registerData);
+
+      // Có thể tự động đăng nhập sau khi đăng ký
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+      }
+
+      alert("Đăng ký thành công!");
+
+      setFormData({ name: "", email: "", password: "" });
+      window.location.href = "/";
+
+      return { success: true, data };
+    } catch (error) {
+      console.error("Registration error:", error?.response?.data?.message);
+      setErrors({ general: error?.response?.data?.message });
+      return { success: false, error: error?.response?.data?.message };
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      console.log("Form submitted:", formData);
-      // Handle form submission here
-      alert(`${isLogin ? "Đăng nhập" : "Đăng ký"} thành công!`);
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsLoading(true);
+    setErrors({}); // Clear previous errors
+
+    try {
+      if (isLogin) {
+        // Đăng nhập
+        const loginData = {
+          email: formData.email,
+          password: formData.password,
+        };
+
+        const result = await loginUser(loginData);
+
+        if (result.success) {
+          console.log("Login successful");
+        }
+      } else {
+        // Đăng ký
+        const registerData = {
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+        };
+
+        const result = await registerUser(registerData);
+
+        if (result.success) {
+          console.log("Registration successful");
+        }
+      }
+    } catch (error) {
+      console.error("Submit error:", error);
+      setErrors({ general: "Có lỗi xảy ra. Vui lòng thử lại." });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -101,6 +190,10 @@ const LoginRegister = () => {
     setShowPassword(false);
   };
 
+  if (token) {
+    return <></>;
+  }
+
   return (
     <Container>
       <AuthCard>
@@ -121,6 +214,12 @@ const LoginRegister = () => {
           <FormTitle>{isLogin ? "Đăng Nhập" : "Đăng Ký"}</FormTitle>
 
           <div>
+            {errors.general && (
+              <ErrorText style={{ textAlign: "center", marginBottom: "20px" }}>
+                {errors.general}
+              </ErrorText>
+            )}
+
             {!isLogin && (
               <InputGroup>
                 <InputWrapper>
@@ -213,8 +312,17 @@ const LoginRegister = () => {
               </ForgotPasswordWrapper>
             )}
 
-            <Button onClick={handleSubmit}>
-              {isLogin ? "Đăng Nhập" : "Đăng Ký"}
+            <Button onClick={handleSubmit} disabled={isLoading}>
+              {isLoading ? (
+                <>
+                  <span style={{ marginRight: "8px" }}>⏳</span>
+                  {isLogin ? "Đang đăng nhập..." : "Đang đăng ký..."}
+                </>
+              ) : isLogin ? (
+                "Đăng Nhập"
+              ) : (
+                "Đăng Ký"
+              )}
             </Button>
           </div>
 

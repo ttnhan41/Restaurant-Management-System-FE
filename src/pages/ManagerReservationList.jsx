@@ -18,15 +18,17 @@ import axios from "axios";
 const ManagerReservationList = () => {
   const [tables, setTables] = useState([]);
   const [userRole, setUserRole] = useState(null);
+  const [token, setToken] = useState("");
 
-  const token =
-    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwic3ViIjoidXNlckBnbWFpbC5jb20iLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTc0OTAyMTg5NSwiZXhwIjoxNzQ5MDI1NDk1fQ.8wHK7iWKNVM8TVJoG5N0Q1w2VTYwHc8aayDBDuO_hLw";
+  useEffect(() => {
+    const retrievedToken = localStorage.getItem("token");
+    setToken(retrievedToken);
+  }, []);
 
   useEffect(() => {
     // Lấy role từ token
     try {
-      const tokenPart = token.split(" ")[1];
-      const payload = JSON.parse(atob(tokenPart.split(".")[1]));
+      const payload = JSON.parse(atob(token.split(".")[1]));
       setUserRole(payload.role);
     } catch (error) {
       console.error("Lỗi khi giải mã token:", error);
@@ -52,7 +54,7 @@ const ManagerReservationList = () => {
           available: !currentStatus,
         },
         {
-          headers: { Authorization: token },
+          headers: { Authorization: `Bearer ${token}` },
         }
       )
       .then(() => {

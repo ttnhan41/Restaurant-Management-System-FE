@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ChefHat } from "lucide-react";
 import {
@@ -16,6 +16,17 @@ import {
 // Header Component
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const retrievedToken = localStorage.getItem("token");
+    setToken(retrievedToken);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/";
+  };
 
   return (
     <HeaderContainer>
@@ -31,7 +42,13 @@ const Header = () => {
           <NavLink href="#">Trang chủ</NavLink>
           <NavLink href="#">Menu</NavLink>
           <NavLink href="#">Đặt bàn</NavLink>
-          <NavLink href="/login-register">Đăng nhập/Đăng ký</NavLink>
+          {token ? (
+            <NavLink href="#" onClick={handleLogout}>
+              Đăng xuất
+            </NavLink>
+          ) : (
+            <NavLink href="/login-register">Đăng nhập/Đăng ký</NavLink>
+          )}
         </Navigation>
 
         <MobileMenuButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -57,9 +74,15 @@ const Header = () => {
           <MobileNavLink href="#">Trang chủ</MobileNavLink>
           <MobileNavLink href="#">Menu</MobileNavLink>
           <MobileNavLink href="#">Đặt bàn</MobileNavLink>
-          <MobileNavLink href="/login-register">
-            Đăng nhập/Đăng ký
-          </MobileNavLink>
+          {token ? (
+            <MobileNavLink href="#" onClick={handleLogout}>
+              Đăng xuất
+            </MobileNavLink>
+          ) : (
+            <MobileNavLink href="/login-register">
+              Đăng nhập/Đăng ký
+            </MobileNavLink>
+          )}
         </MobileNav>
       )}
     </HeaderContainer>

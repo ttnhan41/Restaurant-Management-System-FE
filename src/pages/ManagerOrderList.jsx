@@ -14,9 +14,12 @@ const ManagerOrderList = () => {
   const [orders, setOrders] = useState([]);
   const [menuItems, setMenuItems] = useState([]);
   const [error, setError] = useState(null);
+  const [token, setToken] = useState("");
 
-  const token =
-    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwic3ViIjoidXNlckBnbWFpbC5jb20iLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTc0OTAxODE1MSwiZXhwIjoxNzQ5MDIxNzUxfQ.dcgvVcFVIJhEkdQNpw8SiUvq8agH_r5dMA6qG1fKWrI";
+  useEffect(() => {
+    const retrievedToken = localStorage.getItem("token");
+    setToken(retrievedToken);
+  }, []);
 
   useEffect(() => {
     axios
@@ -32,7 +35,9 @@ const ManagerOrderList = () => {
   const loadOrders = async () => {
     try {
       const response = await axios
-        .get("/api/orders/all", { headers: { Authorization: token } })
+        .get("/api/orders/all", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
         .then((res) => setOrders(res.data))
         .catch((err) => console.error(err));
 
@@ -62,7 +67,7 @@ const ManagerOrderList = () => {
           id: orderId,
           status: newStatus,
         },
-        { headers: { Authorization: token } }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       await loadOrders();
