@@ -8,11 +8,9 @@ import {
   LogoText,
   Navigation,
   NavLink,
-  LoginButton,
   MobileMenuButton,
   MobileNav,
   MobileNavLink,
-  MobileLoginButton,
 } from "../assets/wrappers/HomePage";
 
 // Header Component
@@ -33,7 +31,7 @@ const Header = () => {
           <NavLink href="#">Trang chủ</NavLink>
           <NavLink href="#">Menu</NavLink>
           <NavLink href="#">Đặt bàn</NavLink>
-          <LoginButton>Đăng nhập/Đăng ký</LoginButton>
+          <NavLink href="/login-register">Đăng nhập/Đăng ký</NavLink>
         </Navigation>
 
         <MobileMenuButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -59,7 +57,9 @@ const Header = () => {
           <MobileNavLink href="#">Trang chủ</MobileNavLink>
           <MobileNavLink href="#">Menu</MobileNavLink>
           <MobileNavLink href="#">Đặt bàn</MobileNavLink>
-          <MobileLoginButton>Đăng nhập/Đăng ký</MobileLoginButton>
+          <MobileNavLink href="/login-register">
+            Đăng nhập/Đăng ký
+          </MobileNavLink>
         </MobileNav>
       )}
     </HeaderContainer>

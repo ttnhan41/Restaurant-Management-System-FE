@@ -2,8 +2,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
   Home,
   HomeLayout,
-  Register,
-  Login,
   Error,
   Menu,
   MenuItemDetail,
@@ -15,6 +13,7 @@ import {
   ManagerReservationList,
   ManagerUserList,
   Account,
+  LoginRegister,
 } from "./pages";
 
 // Routes
@@ -29,12 +28,8 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "register",
-        element: <Register />,
-      },
-      {
-        path: "login",
-        element: <Login />,
+        path: "login-register",
+        element: <LoginRegister />,
       },
       {
         path: "menu",
