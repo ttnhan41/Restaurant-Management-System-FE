@@ -1,3 +1,5 @@
+# 🍽️ Restaurant Management System – Frontend
+
 ## ⚙️ Installation Guide
 
 ```

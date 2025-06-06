@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ChefHat } from "lucide-react";
+import { ChefHat, User } from "lucide-react";
 import {
   HeaderContainer,
   HeaderContent,
@@ -11,16 +11,34 @@ import {
   MobileMenuButton,
   MobileNav,
   MobileNavLink,
+  UserInfo,
 } from "../assets/wrappers/HomePage";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 // Header Component
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [token, setToken] = useState("");
+  const [user, setUser] = useState({});
+
+  const fetchCurrentUser = async (token) => {
+    try {
+      const userResponse = await axios.get("/api/users/current-user", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setUser(userResponse.data);
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
 
   useEffect(() => {
     const retrievedToken = localStorage.getItem("token");
-    setToken(retrievedToken);
+    if (retrievedToken) {
+      setToken(retrievedToken);
+      fetchCurrentUser(retrievedToken);
+    }
   }, []);
 
   const handleLogout = () => {
@@ -39,17 +57,29 @@ const Header = () => {
         </Link>
 
         <Navigation>
-          <NavLink href="#">Trang chủ</NavLink>
+          <NavLink href="/">Trang chủ</NavLink>
           <NavLink href="#">Menu</NavLink>
           <NavLink href="#">Đặt bàn</NavLink>
           {token ? (
-            <NavLink href="#" onClick={handleLogout}>
-              Đăng xuất
-            </NavLink>
+            <Navigation>
+              <NavLink href="#">Tài khoản</NavLink>
+              <NavLink href="#" onClick={handleLogout}>
+                Đăng xuất
+              </NavLink>
+            </Navigation>
           ) : (
             <NavLink href="/login-register">Đăng nhập/Đăng ký</NavLink>
           )}
         </Navigation>
+
+        {token ? (
+          <UserInfo>
+            <User size={26} color="#2cb1bc" />
+            <p>{user.name}</p>
+          </UserInfo>
+        ) : (
+          <></>
+        )}
 
         <MobileMenuButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
           <svg
@@ -71,13 +101,16 @@ const Header = () => {
 
       {isMenuOpen && (
         <MobileNav>
-          <MobileNavLink href="#">Trang chủ</MobileNavLink>
+          <MobileNavLink href="/">Trang chủ</MobileNavLink>
           <MobileNavLink href="#">Menu</MobileNavLink>
           <MobileNavLink href="#">Đặt bàn</MobileNavLink>
           {token ? (
-            <MobileNavLink href="#" onClick={handleLogout}>
-              Đăng xuất
-            </MobileNavLink>
+            <MobileNav>
+              <MobileNavLink href="#">Tài khoản</MobileNavLink>
+              <MobileNavLink href="#" onClick={handleLogout}>
+                Đăng xuất
+              </MobileNavLink>
+            </MobileNav>
           ) : (
             <MobileNavLink href="/login-register">
               Đăng nhập/Đăng ký
@@ -85,6 +118,7 @@ const Header = () => {
           )}
         </MobileNav>
       )}
+      <ToastContainer />
     </HeaderContainer>
   );
 };
