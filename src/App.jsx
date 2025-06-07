@@ -14,7 +14,11 @@ import {
   ManagerUserList,
   Account,
   LoginRegister,
+  EditProfilePage,
+  OrderListPage,
+  ReservationListPage,
 } from "./pages";
+
 
 // Routes
 const router = createBrowserRouter([
@@ -46,6 +50,18 @@ const router = createBrowserRouter([
       {
         path: "account",
         element: <Account />,
+      },
+      {
+        path:"editProfile",
+        element:<EditProfilePage/>,
+      },
+      {
+        path:"order-list",
+        element:<OrderListPage/>,
+      },
+      {
+        path:"reservation-list",
+        element:<ReservationListPage/>,
       },
       {
         path: "manager",
