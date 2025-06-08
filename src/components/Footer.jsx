@@ -24,11 +24,11 @@ const Footer = () => {
           <FooterSection>
             <FooterLogo>
               <ChefHat size={32} color="#2cb1bc" />
-              <FooterLogoText>Savor</FooterLogoText>
+              <FooterLogoText>Foodive Hero</FooterLogoText>
             </FooterLogo>
             <FooterDescription>
-              Nhà hàng Savor - Nơi hội tụ tinh hoa ẩm thực, mang đến trải nghiệm
-              ăn uống đáng nhớ cho mọi thực khách.
+              Nhà hàng Foodive Hero - Nơi hội tụ tinh hoa ẩm thực, mang đến trải
+              nghiệm ăn uống đáng nhớ cho mọi thực khách.
             </FooterDescription>
           </FooterSection>
 
@@ -37,7 +37,7 @@ const Footer = () => {
             <div>
               <ContactItem>
                 <MapPin size={20} color="#2cb1bc" />
-                <ContactText>123 Nguyễn Văn Cừ, Quận 1, TP.HCM</ContactText>
+                <ContactText>123 Nguyễn Văn A, Quận 1, TP.HCM</ContactText>
               </ContactItem>
               <ContactItem>
                 <Phone size={20} color="#2cb1bc" />
@@ -45,7 +45,7 @@ const Footer = () => {
               </ContactItem>
               <ContactItem>
                 <Mail size={20} color="#2cb1bc" />
-                <ContactText>info@savor.com</ContactText>
+                <ContactText>info@foodivehero.com</ContactText>
               </ContactItem>
               <ContactItem>
                 <Clock size={20} color="#2cb1bc" />
@@ -67,7 +67,7 @@ const Footer = () => {
         </FooterGrid>
 
         <Copyright>
-          <p>© 2025 Nhà hàng Savor. Tất cả quyền được bảo lưu.</p>
+          <p>© 2025 Nhà hàng Foodive Hero. Tất cả quyền được bảo lưu.</p>
         </Copyright>
       </FooterContent>
     </FooterContainer>

@@ -7,18 +7,12 @@ import {
   MenuItemDetail,
   Reservation,
   ManagerDashboard,
-  ManagerMenuItemList,
-  ManagerOrderList,
-  ManagerTableList,
-  ManagerReservationList,
-  ManagerUserList,
   Account,
   LoginRegister,
   EditProfilePage,
   OrderListPage,
   ReservationListPage,
 } from "./pages";
-
 
 // Routes
 const router = createBrowserRouter([
@@ -52,42 +46,25 @@ const router = createBrowserRouter([
         element: <Account />,
       },
       {
-        path:"editProfile",
-        element:<EditProfilePage/>,
-      },
-      {
-        path:"order-list",
-        element:<OrderListPage/>,
-      },
-      {
-        path:"reservation-list",
-        element:<ReservationListPage/>,
-      },
-      {
-        path: "manager",
-        //element: <ManagerDashboard />,
+        path: "user",
         children: [
           {
-            path: "menu-item-list",
-            element: <ManagerMenuItemList />,
+            path: "edit-profile",
+            element: <EditProfilePage />,
           },
           {
             path: "order-list",
-            element: <ManagerOrderList />,
-          },
-          {
-            path: "table-list",
-            element: <ManagerTableList />,
+            element: <OrderListPage />,
           },
           {
             path: "reservation-list",
-            element: <ManagerReservationList />,
-          },
-          {
-            path: "user-list",
-            element: <ManagerUserList />,
+            element: <ReservationListPage />,
           },
         ],
+      },
+      {
+        path: "manager",
+        element: <ManagerDashboard />,
       },
     ],
   },

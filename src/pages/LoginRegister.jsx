@@ -199,7 +199,7 @@ const LoginRegister = () => {
       <AuthCard>
         <LeftPanel>
           <FoodIcon>🍽️</FoodIcon>
-          <Logo>Savor</Logo>
+          <Logo>Foodive Hero</Logo>
           <WelcomeText>
             {isLogin ? "Chào mừng trở lại!" : "Tham gia cùng chúng tôi!"}
           </WelcomeText>

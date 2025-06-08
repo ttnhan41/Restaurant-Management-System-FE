@@ -33,7 +33,7 @@ export const Logo = styled.div`
 export const LogoText = styled.span`
   font-size: 1.5rem;
   font-weight: bold;
-  color: #1f2937;
+  color: #0a6c74;
 `;
 
 export const Navigation = styled.nav`

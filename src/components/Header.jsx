@@ -52,12 +52,17 @@ const Header = () => {
         <Link to="/">
           <Logo>
             <ChefHat size={32} color="#2cb1bc" />
-            <LogoText>Savor</LogoText>
+            <LogoText>Foodive Hero</LogoText>
           </Logo>
         </Link>
 
         <Navigation>
           <NavLink href="/">Trang chủ</NavLink>
+          {user.role === "MANAGER" ? (
+            <NavLink href="/manager">Trang quản lý</NavLink>
+          ) : (
+            <></>
+          )}
           <NavLink href="#">Menu</NavLink>
           <NavLink href="#">Đặt bàn</NavLink>
           {token ? (
@@ -102,6 +107,11 @@ const Header = () => {
       {isMenuOpen && (
         <MobileNav>
           <MobileNavLink href="/">Trang chủ</MobileNavLink>
+          {user.role === "MANAGER" ? (
+            <MobileNavLink href="/manager">Trang quản lý</MobileNavLink>
+          ) : (
+            <></>
+          )}
           <MobileNavLink href="#">Menu</MobileNavLink>
           <MobileNavLink href="#">Đặt bàn</MobileNavLink>
           {token ? (
