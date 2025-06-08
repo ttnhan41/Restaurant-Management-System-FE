@@ -109,7 +109,7 @@ const ManagerDashboard = () => {
 
   const fetchReservations = async (token) => {
     try {
-      const reservationResponse = await axios.get("/api/reservations", {
+      const reservationResponse = await axios.get("/api/reservations/all", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setReservations(reservationResponse.data);

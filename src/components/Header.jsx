@@ -64,7 +64,7 @@ const Header = () => {
             <></>
           )}
           <NavLink href="#">Menu</NavLink>
-          <NavLink href="#">Đặt bàn</NavLink>
+          <NavLink href="/reservation">Đặt bàn</NavLink>
           {token ? (
             <Navigation>
               <NavLink href="#">Tài khoản</NavLink>
@@ -113,7 +113,7 @@ const Header = () => {
             <></>
           )}
           <MobileNavLink href="#">Menu</MobileNavLink>
-          <MobileNavLink href="#">Đặt bàn</MobileNavLink>
+          <MobileNavLink href="/reservation">Đặt bàn</MobileNavLink>
           {token ? (
             <MobileNav>
               <MobileNavLink href="#">Tài khoản</MobileNavLink>
