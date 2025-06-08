@@ -12,3 +12,7 @@ export { default as ManagerTableList } from "./ManagerTableList";
 export { default as ManagerReservationList } from "./ManagerReservationList";
 export { default as ManagerUserList } from "./ManagerUserList";
 export { default as Account } from "./Account";
+export {default as CartPage} from "./CartPage";
+export {default as EditProfilePage} from "./EditProfilePage";
+export {default as OrderListPage} from "./OrderListPage";
+export {default as ReservationListPage} from "./ReservationListPage";
