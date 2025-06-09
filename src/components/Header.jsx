@@ -67,7 +67,7 @@ const Header = () => {
           <NavLink href="/reservation">Đặt bàn</NavLink>
           {token ? (
             <Navigation>
-              <NavLink href="#">Tài khoản</NavLink>
+              <NavLink href="/account">Tài khoản</NavLink>
               <NavLink href="#" onClick={handleLogout}>
                 Đăng xuất
               </NavLink>
@@ -116,7 +116,7 @@ const Header = () => {
           <MobileNavLink href="/reservation">Đặt bàn</MobileNavLink>
           {token ? (
             <MobileNav>
-              <MobileNavLink href="#">Tài khoản</MobileNavLink>
+              <MobileNavLink href="/account">Tài khoản</MobileNavLink>
               <MobileNavLink href="#" onClick={handleLogout}>
                 Đăng xuất
               </MobileNavLink>

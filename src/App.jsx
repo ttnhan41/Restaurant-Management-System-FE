@@ -9,9 +9,6 @@ import {
   ManagerDashboard,
   Account,
   LoginRegister,
-  EditProfilePage,
-  OrderListPage,
-  ReservationListPage,
 } from "./pages";
 
 // Routes
@@ -44,23 +41,6 @@ const router = createBrowserRouter([
       {
         path: "account",
         element: <Account />,
-      },
-      {
-        path: "user",
-        children: [
-          {
-            path: "edit-profile",
-            element: <EditProfilePage />,
-          },
-          {
-            path: "order-list",
-            element: <OrderListPage />,
-          },
-          {
-            path: "reservation-list",
-            element: <ReservationListPage />,
-          },
-        ],
       },
       {
         path: "manager",

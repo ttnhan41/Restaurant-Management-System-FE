@@ -674,7 +674,7 @@ const ManagerDashboard = () => {
   };
 
   if (user.role !== "MANAGER") {
-    return <></>;
+    return <h5>Bạn không có quyền truy cập vào đường dẫn này</h5>;
   }
 
   return (
