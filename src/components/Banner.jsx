@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import {
   BannerContainer,
   BannerOverlay,
@@ -11,6 +12,8 @@ import {
 
 // Banner Component
 const Banner = () => {
+  const navigate = useNavigate();
+
   return (
     <BannerContainer>
       <BannerOverlay />
@@ -21,8 +24,12 @@ const Banner = () => {
           đầu bếp chuyên nghiệp
         </BannerDescription>
         <ButtonGroup>
-          <PrimaryButton>Xem Menu</PrimaryButton>
-          <SecondaryButton>Đặt bàn ngay</SecondaryButton>
+          <PrimaryButton onClick={() => navigate("/menu")}>
+            Xem Menu
+          </PrimaryButton>
+          <SecondaryButton onClick={() => navigate("/reservation")}>
+            Đặt bàn ngay
+          </SecondaryButton>
         </ButtonGroup>
       </BannerContent>
     </BannerContainer>

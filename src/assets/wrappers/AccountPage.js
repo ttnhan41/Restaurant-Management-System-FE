@@ -7,7 +7,7 @@ export const Container = styled.div`
 
 export const AccountWrapper = styled.div`
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 10px auto 0 auto;
 `;
 
 export const HeaderSection = styled.div`
@@ -144,6 +144,7 @@ export const ContentSection = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
+  margin-bottom: 10px;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;

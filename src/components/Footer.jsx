@@ -57,9 +57,9 @@ const Footer = () => {
           <FooterSection>
             <FooterTitle>Menu nhanh</FooterTitle>
             <FooterLinks>
-              <FooterLink href="#">Trang chủ</FooterLink>
-              <FooterLink href="#">Thực đơn</FooterLink>
-              <FooterLink href="#">Đặt bàn</FooterLink>
+              <FooterLink href="/">Trang chủ</FooterLink>
+              <FooterLink href="/menu">Thực đơn</FooterLink>
+              <FooterLink href="/reservation">Đặt bàn</FooterLink>
               <FooterLink href="#">Liên hệ</FooterLink>
               <FooterLink href="#">Về chúng tôi</FooterLink>
             </FooterLinks>
